@@ -76,5 +76,6 @@ calculadora-curso-git/
 ## 🐱‍👤 Integrantes
 
 - Tomas Gonzalez
+- Ximena Sarmiento
 
 
