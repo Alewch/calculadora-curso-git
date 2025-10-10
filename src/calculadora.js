@@ -12,11 +12,21 @@ class Calculadora {
   }
 
   dividir(a, b) {
-    // TODO: Implementar división
+    if (a === 0 || b === 0) {
+      return "Error: no se puede dividir por cero.";
+    }
+      let division; 
+      if (a > b) { 
+        division = a / b;
+      } else {
+        division = b / a;
+      }
+
+    return division;
   }
 
   potencia(base, exponente) {
-    // TODO: Implementar potencia
+    return base ** exponente
   }
 
   raizCuadrada(numero) {
