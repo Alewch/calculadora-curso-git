@@ -13,6 +13,10 @@ class Calculadora {
 
   dividir(a, b) {
     // TODO: Implementar división
+    if(b===0) 
+      return "Error division por cero";
+    else 
+      return a/b;
   }
 
   potencia(base, exponente) {
