@@ -27,6 +27,12 @@ class Calculadora {
   raizCuadrada(numero) {
     return Math.sqrt(numero);
   }
+  calcularResto(a, b) {
+    if (b === 0) {
+        throw new Error("No se puede dividir por cero");
+    }
+    return a % b;
+  }
 }
 
 // Exportar para usar en tests
