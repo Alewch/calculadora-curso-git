@@ -19,6 +19,7 @@ function mostrarMenu() {
   console.log('5. Potencia');
   console.log('6. Raíz Cuadrada');
   console.log('7. Resto');
+  console.log('8. Logaritmo Natural');
   console.log('0. Salir');
   console.log('=================================');
 }

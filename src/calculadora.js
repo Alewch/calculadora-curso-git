@@ -33,6 +33,13 @@ class Calculadora {
     }
     return a % b;
   }
+  
+  logaritmoNatural(a) {
+    if (a <= 0) {
+        throw new Error("El logaritmo solo acepta números positivos");
+    }
+    return Math.log(a);
+}
 }
 
 // Exportar para usar en tests
