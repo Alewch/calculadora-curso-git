@@ -22,6 +22,13 @@ class Calculadora {
   raizCuadrada(numero) {
     return Math.sqrt(numero);
   }
+
+  porcentaje(a, b) {
+    if (b === 0) {
+      return "Error: División por cero en el cálculo de porcentaje";
+    }
+    return (a / b) * 100;
+  }
 }
 
 // Exportar para usar en tests
