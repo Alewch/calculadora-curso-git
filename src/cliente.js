@@ -21,6 +21,7 @@ function mostrarMenu() {
   console.log('7. Resto');
   console.log('8. Logaritmo Natural');
   console.log('9. Porcentaje (a/b)*100');
+  console.log('10. Máximo de Array');
   console.log('0. Salir');
   console.log('=================================');
 }
@@ -70,6 +71,17 @@ function getSimboloOperacion(nombre) {
     'potencia': '^'
   };
   return simbolos[nombre] || '';
+}
+
+function pedirArray(mensaje) {
+  return new Promise((resolve) => {
+    rl.question(mensaje + ' (separados por coma, ej: 1,2,3): ', (respuesta) => {
+      const numeros = respuesta.split(',')
+                               .map(s => parseFloat(s.trim()))
+                               .filter(n => !isNaN(n)); // Solo números válidos
+      resolve(numeros);
+    });
+  });
 }
 
 async function ejecutarOpcion(opcion) {
@@ -125,6 +137,14 @@ async function ejecutarOpcion(opcion) {
       await operacionDosNumeros(
         (a, b) => calc.porcentaje(a, b),
         'porcentaje'
+      );
+      break;
+
+    case '10': 
+      const numerosMax = await pedirArray('Ingrese los números: ');
+      const resultadoMax = calc.maximoArray(numerosMax);
+      
+      console.log(`\n✓ Resultado: Máximo de [${numerosMax.join(', ')}] = ${resultadoMax}`
       );
       break;
     
