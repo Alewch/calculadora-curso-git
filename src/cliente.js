@@ -59,7 +59,12 @@ async function operacionUnNumero(operacion, nombreOperacion) {
   } else if (isNaN(resultado)) {
     console.log(`\n⚠️  Error: Operación inválida (resultado: NaN)`);
   } else {
-    console.log(`\n✓ Resultado: √${num} = ${resultado}`);
+    const op = nombreOperacion.toLowerCase();
+    if (op.includes('factorial')) {
+      console.log(`\n✓ Resultado: ${num}! = ${resultado}`);
+    } else if (op.includes('raíz') || op.includes('raiz')) {
+      console.log(`\n✓ Resultado: √${num} = ${resultado}`);
+    } 
   }
 }
 
@@ -146,6 +151,13 @@ async function ejecutarOpcion(opcion) {
       const resultadoMax = calc.maximoArray(numerosMax);
       
       console.log(`\n✓ Resultado: Máximo de [${numerosMax.join(', ')}] = ${resultadoMax}`
+      );
+      break;
+
+    case '11':
+      await operacionUnNumero(
+        (n) => calc.factorial(n),
+        'factorial'
       );
       break;
     
