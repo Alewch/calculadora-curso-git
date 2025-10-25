@@ -18,6 +18,7 @@ function mostrarMenu() {
   console.log('4. Dividir');
   console.log('5. Potencia');
   console.log('6. Raíz Cuadrada');
+  console.log('7. Porcentaje (a/b)*100');
   console.log('0. Salir');
   console.log('=================================');
 }
@@ -115,6 +116,13 @@ async function ejecutarOpcion(opcion) {
       await operacionUnNumero(
         (num) => calc.raizCuadrada(num),
         'raíz cuadrada'
+      );
+      break;
+
+    case '7': 
+      await operacionDosNumeros(
+        (a, b) => calc.porcentaje(a, b),
+        'porcentaje'
       );
       break;
     
