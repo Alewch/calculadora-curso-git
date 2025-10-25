@@ -22,6 +22,7 @@ function mostrarMenu() {
   console.log('8. Logaritmo Natural');
   console.log('9. Porcentaje (a/b)*100');
   console.log('10. Máximo de Array');
+  console.log('11. Factorial');
   console.log('0. Salir');
   console.log('=================================');
 }
