@@ -63,3 +63,4 @@ console.log('- calc.multiplicar(a, b)');
 console.log('- calc.dividir(a, b)');
 console.log('- calc.potencia(base, exponente)');
 console.log('- calc.raizCuadrada(numero)');
+console.log('- calc.porcentaje(a, b)');
