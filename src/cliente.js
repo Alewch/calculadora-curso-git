@@ -18,7 +18,9 @@ function mostrarMenu() {
   console.log('4. Dividir');
   console.log('5. Potencia');
   console.log('6. Raíz Cuadrada');
-  console.log('7. Porcentaje (a/b)*100');
+  console.log('7. Resto');
+  console.log('8. Logaritmo Natural');
+  console.log('9. Porcentaje (a/b)*100');
   console.log('0. Salir');
   console.log('=================================');
 }
@@ -119,7 +121,7 @@ async function ejecutarOpcion(opcion) {
       );
       break;
 
-    case '7': 
+    case '9': 
       await operacionDosNumeros(
         (a, b) => calc.porcentaje(a, b),
         'porcentaje'
