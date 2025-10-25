@@ -43,6 +43,14 @@ class Calculadora {
     }
     return Math.log(a);
  }
+
+  maximoArray(numeros) {
+    if (!Array.isArray(numeros) || numeros.length === 0) {
+      return "Error: Ingrese un array de números válido";
+    }
+    return Math.max(...numeros); 
+  }
+
 }
 
 // Exportar para usar en tests
@@ -63,3 +71,5 @@ console.log('- calc.multiplicar(a, b)');
 console.log('- calc.dividir(a, b)');
 console.log('- calc.potencia(base, exponente)');
 console.log('- calc.raizCuadrada(numero)');
+console.log('- calc.porcentaje(a, b)');
+console.log('- calc.maximoArray(array)');
