@@ -8,6 +8,30 @@ const rl = readline.createInterface({
 
 const calc = new Calculadora();
 
+// historial de la sesión
+let historial = [];
+
+function guardarHistorial(entry) {
+  historial.push({
+    fecha: new Date().toISOString(),
+    ...entry
+  });
+}
+
+function mostrarHistorial() {
+  if (historial.length === 0) {
+    console.log('\nℹ️  Historial vacío.');
+    return;
+  }
+  console.log('\n===== Historial de operaciones =====');
+  historial.forEach((h, i) => {
+    const tiempo = new Date(h.fecha).toLocaleString();
+    const args = Array.isArray(h.args) ? h.args.join(', ') : String(h.args);
+    console.log(`${i + 1}. [${tiempo}] ${h.operacion} — entrada: ${args} => resultado: ${h.resultado}`);
+  });
+  console.log('====================================');
+}
+
 function mostrarMenu() {
   console.log('\n=================================');
   console.log('     CALCULADORA INTERACTIVA     ');
@@ -23,9 +47,11 @@ function mostrarMenu() {
   console.log('9. Porcentaje (a/b)*100');
   console.log('10. Máximo de Array');
   console.log('11. Factorial');
+  console.log('12. Ver historial');
   console.log('0. Salir');
   console.log('=================================');
 }
+
 
 function pedirNumero(mensaje) {
   return new Promise((resolve) => {
@@ -46,6 +72,11 @@ async function operacionDosNumeros(operacion, nombreOperacion) {
     console.log(`\n⚠️  La función ${nombreOperacion} aún no está implementada`);
   } else {
     console.log(`\n✓ Resultado: ${num1} ${getSimboloOperacion(nombreOperacion)} ${num2} = ${resultado}`);
+    guardarHistorial({
+      operacion: nombreOperacion,
+      args: [num1, num2],
+      resultado
+    });
   }
 }
 
@@ -64,7 +95,14 @@ async function operacionUnNumero(operacion, nombreOperacion) {
       console.log(`\n✓ Resultado: ${num}! = ${resultado}`);
     } else if (op.includes('raíz') || op.includes('raiz')) {
       console.log(`\n✓ Resultado: √${num} = ${resultado}`);
-    } 
+    } else {
+      console.log(`\n✓ Resultado: ${nombreOperacion} ${num} = ${resultado}`);
+    }
+    guardarHistorial({
+      operacion: nombreOperacion,
+      args: [num],
+      resultado
+    });
   }
 }
 
@@ -121,14 +159,21 @@ async function ejecutarOpcion(opcion) {
       break;
     
     case '5':
-      const base = await pedirNumero('Ingrese la base: ');
-      const exponente = await pedirNumero('Ingrese el exponente: ');
-      const resultadoPot = calc.potencia(base, exponente);
-      
-      if (resultadoPot === undefined) {
-        console.log('\n⚠️  La función potencia aún no está implementada');
-      } else {
-        console.log(`\n✓ Resultado: ${base}^${exponente} = ${resultadoPot}`);
+      {
+        const base = await pedirNumero('Ingrese la base: ');
+        const exponente = await pedirNumero('Ingrese el exponente: ');
+        const resultadoPot = calc.potencia(base, exponente);
+        
+        if (resultadoPot === undefined) {
+          console.log('\n⚠️  La función potencia aún no está implementada');
+        } else {
+          console.log(`\n✓ Resultado: ${base}^${exponente} = ${resultadoPot}`);
+          guardarHistorial({
+            operacion: 'potencia',
+            args: [base, exponente],
+            resultado: resultadoPot
+          });
+        }
       }
       break;
     
@@ -147,11 +192,18 @@ async function ejecutarOpcion(opcion) {
       break;
 
     case '10': 
-      const numerosMax = await pedirArray('Ingrese los números: ');
-      const resultadoMax = calc.maximoArray(numerosMax);
-      
-      console.log(`\n✓ Resultado: Máximo de [${numerosMax.join(', ')}] = ${resultadoMax}`
-      );
+      {
+        const numerosMax = await pedirArray('Ingrese los números: ');
+        const resultadoMax = calc.maximoArray(numerosMax);
+        
+        console.log(`\n✓ Resultado: Máximo de [${numerosMax.join(', ')}] = ${resultadoMax}`
+        );
+        guardarHistorial({
+          operacion: 'maximo array',
+          args: numerosMax,
+          resultado: resultadoMax
+        });
+      }
       break;
 
     case '11':
@@ -159,6 +211,10 @@ async function ejecutarOpcion(opcion) {
         (n) => calc.factorial(n),
         'factorial'
       );
+      break;
+
+    case '12':
+      mostrarHistorial();
       break;
     
     case '0':
